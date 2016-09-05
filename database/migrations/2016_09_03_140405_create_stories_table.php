@@ -18,7 +18,9 @@ class CreateStoriesTable extends Migration
             $table->string('title');
             $table->string('synopsis');
             $table->integer('story_type_id');
-            $table->integer('user_id');
+            $table->integer('user_id')->references('id')->on('users');
+            $table->integer('story_status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +32,7 @@ class CreateStoriesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('stories');
     }
 }

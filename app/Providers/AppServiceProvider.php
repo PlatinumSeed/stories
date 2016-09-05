@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Story::deleted(function ($story) {
+        //     $fragments = Fragment::where('story_id', $story->id)->get();
+        //     $fragments->delete();
+        // });
     }
 
     /**

@@ -17,10 +17,12 @@ class CreateFragmentsTable extends Migration
             $table->increments('id');
             $table->text('content');
             $table->integer('fragment_type_id');
-            $table->integer('user_id');
-            $table->integer('story_id');
+            $table->integer('user_id')->references('id')->on('users');
+            $table->integer('story_id')->references('id')->on('stories');
             $table->integer('fragment_type');
             $table->integer('order');
+            $table->integer('fragment_status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -32,6 +34,7 @@ class CreateFragmentsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('fragments');
     }
 }
